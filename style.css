@@ -1,0 +1,188 @@
+/* ========== Fondo ==========
+   Cambia la imagen editando la variable --bg-url.
+   Puedes apuntar a /img/mi-fondo.jpg u otra URL.
+*/
+:root {
+  --bg-url: url("../img/esfera-humeda-sobre-agua-reflectante-belleza-abstracta-generada-por-ia.jpg");
+  --blur: 10px;
+  --radius: 20px;
+  --shadow: 0 10px 30px rgba(0,0,0,.25);
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+  color: #0b1021;
+  display: grid;
+  place-items: center;
+  background: #0b1021;
+  min-height: 100vh;
+}
+
+.bg {
+  position: fixed;
+  inset: 0;
+  background-image: var(--bg-url);
+  background-size: cover;
+  background-position: center;
+  filter: saturate(1.1) brightness(.75);
+  z-index: -2;
+}
+
+.bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+  z-index: -1;
+}
+
+/* ========== Tarjeta calculadora ========== */
+.calculator {
+  width: min(720px, 92vw);
+  background: rgba(255,255,255,.18);
+  border: 1px solid rgba(255,255,255,.25);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(var(--blur));
+  -webkit-backdrop-filter: blur(var(--blur));
+  padding: 28px;
+  transform: translateY(-2vh);
+}
+
+.calculator h1 {
+  margin: 0 0 18px;
+  font-size: clamp(20px, 2.6vw, 28px);
+  color: #fff;
+  letter-spacing: .3px;
+  text-shadow: 0 1px 3px rgba(0,0,0,.35);
+}
+
+.help {
+  margin: 8px 0 16px;
+  color: rgba(255,255,255,.8);
+  font-size: 14px;
+}
+
+/* ========== Entradas ========== */
+.inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 16px;
+}
+
+.inputs label {
+  grid-column: span 1;
+  color: rgba(255,255,255,.9);
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.inputs input {
+  appearance: none;
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.45);
+  background: rgba(255,255,255,.2);
+  color: #fff;
+  font-size: 16px;
+  outline: none;
+  transition: box-shadow .2s, border-color .2s, background .2s;
+}
+
+.inputs input:focus {
+  border-color: #fff;
+  box-shadow: 0 0 0 4px rgba(255,255,255,.18);
+  background: rgba(255,255,255,.25);
+}
+
+@media (max-width: 640px) {
+  .inputs { grid-template-columns: 1fr; }
+}
+
+/* ========== Botones ========== */
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 12px 0 6px;
+}
+
+.actions button {
+  cursor: pointer;
+  border: none;
+  padding: 12px 16px;
+  border-radius: 16px;
+  font-weight: 700;
+  letter-spacing: .2px;
+  background: linear-gradient(180deg, #ffffff, #f2f2f2);
+  color: #111;
+  box-shadow: 0 6px 16px rgba(0,0,0,.15);
+  transition: transform .06s ease, box-shadow .2s ease, filter .2s;
+}
+
+.actions button:hover { transform: translateY(-1px); }
+.actions button:active { transform: translateY(0); filter: brightness(.96); }
+
+.actions .ghost {
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.6);
+  box-shadow: none;
+}
+
+/* ========== Resultado ========== */
+.result {
+  margin-top: 18px;
+  padding: 16px;
+  border-radius: 16px;
+  border: 1px dashed rgba(255,255,255,.45);
+  background: rgba(255,255,255,.14);
+  color: #fff;
+}
+
+.result__label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .8px;
+  opacity: .85;
+  margin-bottom: 6px;
+}
+
+.result__value {
+  font-size: clamp(22px, 3.2vw, 30px);
+  font-weight: 800;
+  line-height: 1.2;
+  word-wrap: break-word;
+}
+
+.result__detail {
+  margin-top: 6px;
+  font-size: 14px;
+  opacity: .9;
+}
+
+/* Accesibilidad */
+button:focus-visible, input:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+/* Pie */
+.credits {
+  position: fixed;
+  bottom: 8px;
+  left: 0; right: 0;
+  text-align: center;
+  color: rgba(255,255,255,.75);
+  font-size: 12px;
+  padding: 0 10px;
+  pointer-events: none;
+}
+.credits code { pointer-events: auto; }
