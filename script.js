@@ -42,7 +42,6 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      // Mostrar con formato local (es-CO) y máx 6 decimales
       const fmt = new Intl.NumberFormat("es-CO", { maximumFractionDigits: 6 });
       const v = (typeof data.resultado === "number")
         ? fmt.format(data.resultado)
@@ -57,14 +56,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Delegación de eventos para botones de operación
   document.querySelector(".actions").addEventListener("click", (e) => {
     const btn = e.target.closest("button");
     if (!btn || !btn.dataset.op) return;
     calcular(btn.dataset.op);
   });
 
-  // Limpiar
   document.getElementById("limpiar").addEventListener("click", () => {
     inputs.n1.value = "";
     inputs.n2.value = "";
